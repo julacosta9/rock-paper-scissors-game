@@ -1,0 +1,110 @@
+<script>
+
+function computerPlay() { // Generate random number to determine computer's selection between rock/paper/scissors
+    let randomNumber = Math.random();
+
+    if (randomNumber <= .33) {
+        return "rock";
+    }
+
+    else if (randomNumber > .33 && randomNumber <= .66) {
+        return "paper";
+    }
+
+    else {
+        return "scissors";
+    }   
+}
+
+function playerPlay() { 
+    const playerSelection = prompt("Rock, paper, or scissors?").toLowerCase();
+    return playerSelection;
+    
+}
+
+function playRound (playerSelection, computerSelection) { // Play one round and determine winner
+
+    if (playerSelection === "rock" && computerSelection === "rock") {
+        return "You both threw rock. Play again!"
+    }
+
+    else if (playerSelection === "rock" && computerSelection === "paper") {
+        return "Player threw rock and computer threw paper. Computer Wins!"
+    }
+
+    else if (playerSelection === "rock" && computerSelection === "scissors") {
+        return "Player threw rock and computer threw scissors. Player Wins!"
+    }
+
+    else if (playerSelection === "paper" && computerSelection === "paper") {
+        return "You both threw paper. Play again!"
+    }
+
+    else if (playerSelection === "paper" && computerSelection === "rock") {
+        return "Player threw paper and computer threw rock. Player Wins!"
+    }
+
+    else if (playerSelection === "paper" && computerSelection === "scissors") {
+        return "Player threw paper and computer threw scissors. Computer Wins!"
+    }
+
+    else if (playerSelection === "scissors" && computerSelection === "scissors") {
+        return "You both threw scissors. Play again!"
+    }
+
+    else if (playerSelection === "scissors" && computerSelection === "rock") {
+        return "Player threw scissors and computer threw rock. Computer Wins!"
+    }
+
+    else if (playerSelection === "scissors" && computerSelection === "paper") {
+        return "Player threw scissors and computer threw paper. Player Wins!"
+    }
+}
+
+function game() { // First to 3 rounds wins. After each round, the round number and win count is logged to the console. 
+
+    let playerWins = 0;
+    let computerWins = 0;
+    let roundNumber = 0
+
+    for (let index = 0; index < 5; index++) {
+
+        let round = playRound(playerPlay(), computerPlay());
+
+        if (round.includes("Play again!") === true) {
+            index--; 
+            roundNumber++;
+            console.log("Round " + roundNumber);
+            console.log("Player Wins: " + playerWins);
+            console.log("Computer Wins: " + computerWins);
+        }
+
+        else if (round.includes("Computer Wins!") === true) {
+            computerWins++
+            roundNumber++;
+            console.log("Round " + roundNumber);
+            console.log("Player Wins: " + playerWins);
+            console.log("Computer Wins: " + computerWins);
+        }
+
+        else if (round.includes("Player Wins!") === true) {
+            playerWins++;
+            roundNumber++;
+            console.log("Round " + roundNumber);
+            console.log("Player Wins: " + playerWins);
+            console.log("Computer Wins: " + computerWins);
+        }
+    }
+
+    if (playerWins > computerWins) {
+        return console.log("Player won " + playerWins + " points to " + computerWins + " points")
+    }
+
+    else {
+        return console.log("Computer won " + computerWins + " points to " + playerWins + " points")
+    }
+}
+
+console.log(game());
+
+</script>
